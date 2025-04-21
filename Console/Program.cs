@@ -15,7 +15,6 @@ builder.Services.AddDbContext<BotContext>(options => options.UseSqlServer(builde
 
 #endregion
 builder.Services.AddHostedService<TelegramBotService>();
-builder.Services.AddTransient<AddTransaction>();
 builder.Services.AddServices();
 builder.Services.AddSingleton<Dictionary<long, string>>();
 builder.Logging.ClearProviders();
