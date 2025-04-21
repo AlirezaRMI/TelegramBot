@@ -43,50 +43,61 @@ public class TelegramBotService(
         {
             var chatId = update.Message.Chat.Id;
             var messageTexts = update.Message.Text;
+            var currentState = stateService.GetState(chatId);
 
-            if (stateService.GetState(chatId) is "Increase" or "Decrease")
+            if (currentState == "awaiting_price")
             {
-                if (messageTexts != null)
+                if (int.TryParse(messageTexts, out var price))
                 {
-                    var parts = messageTexts.Split("-", 2, StringSplitOptions.TrimEntries);
+                    stateService.SetTempData(chatId, "price", price);
+                    stateService.SetState(chatId, "awaiting_description");
 
-                    if (parts.Length != 2 || !int.TryParse(parts[0], out var price))
-                    {
-                        await botClient.SendTextMessageAsync(chatId,
-                            "❌ لطفاً فرمت صحیح وارد کنید. مثال: `70000 - توضیحات`",
-                            cancellationToken: cancellationToken);
-                        return;
-                    }
-
-                    string description = parts[1];
-                    string? transactionType = stateService.GetState(chatId);
-
-                    var transaction = new UserTransaction
-                    {
-                        ChatId = chatId,
-                        Price = price,
-                        Description = description,
-                        CreateDate = DateTime.UtcNow,
-                        TransactionType = transactionType == "Decrease"
-                            ? TransactionType.Decrease
-                            : TransactionType.Increase,
-                        Status = TransactionStatus.Success
-                    };
-
-                    await transactionService.CreateTransactionAsync(transaction);
+                    await botClient.SendTextMessageAsync(chatId,
+                        "📝 لطفاً توضیح تراکنش را وارد کنید.",
+                        cancellationToken: cancellationToken);
+                }
+                else
+                {
+                    await botClient.SendTextMessageAsync(chatId,
+                        "❌ مبلغ وارد شده معتبر نیست. لطفاً فقط عدد وارد کنید.",
+                        cancellationToken: cancellationToken);
                 }
 
-                stateService.ClearState(chatId);
-
-                var successMessage = "✅ تراکنش با موفقیت ذخیره شد!";
-                await botClient.SendTextMessageAsync(chatId, successMessage,
-                    cancellationToken: cancellationToken);
-
-                await botClient.SendTextMessageAsync(chatId, "📋دستور بعدی چیه؟",
-                    replyMarkup: GetMainMenuKeyboard(), cancellationToken: cancellationToken);
                 return;
             }
 
+            if (currentState == "awaiting_description")
+            {
+                var price = stateService.GetTempData<int>(chatId, "price");
+                var transactionType = stateService.GetTempData<string>(chatId, "transaction_type");
+
+                var transaction = new UserTransaction
+                {
+                    ChatId = chatId,
+                    Price = price,
+                    Description = messageTexts,
+                    CreateDate = DateTime.UtcNow,
+                    TransactionType = transactionType == "Decrease"
+                        ? TransactionType.Decrease
+                        : TransactionType.Increase,
+                    Status = TransactionStatus.Success
+                };
+
+                await transactionService.CreateTransactionAsync(transaction);
+                stateService.ClearState(chatId);
+                stateService.ClearTempData(chatId);
+
+                await botClient.SendTextMessageAsync(chatId,
+                    "✅ تراکنش با موفقیت ثبت شد!",
+                    cancellationToken: cancellationToken);
+
+                await botClient.SendTextMessageAsync(chatId, "📋 دستور بعدی چیه؟",
+                    replyMarkup: GetMainMenuKeyboard(), cancellationToken: cancellationToken);
+
+                return;
+            }
+
+            // مدیریت دستور /start
             if (messageTexts != null && messageTexts.StartsWith("/start"))
             {
                 var username = update.Message.From?.Username;
@@ -127,6 +138,7 @@ public class TelegramBotService(
             }
         }
 
+        // مدیریت CallbackQuery ها
         if (update.Type == UpdateType.CallbackQuery)
         {
             var callbackQuery = update.CallbackQuery;
@@ -165,15 +177,18 @@ public class TelegramBotService(
 
                 case "Increase":
                 case "Decrease":
-                    await HandleTransactionType(botClient, chatId, callbackData, callbackQuery.Message.MessageId, cancellationToken);
+                    await HandleTransactionType(botClient, chatId, callbackData, callbackQuery.Message.MessageId,
+                        cancellationToken);
                     break;
 
                 case "filter_increase":
-                    await FilterTransactionsByType(botClient, callbackQuery, TransactionType.Increase, cancellationToken);
+                    await FilterTransactionsByType(botClient, callbackQuery, TransactionType.Increase,
+                        cancellationToken);
                     break;
 
                 case "filter_decrease":
-                    await FilterTransactionsByType(botClient, callbackQuery, TransactionType.Decrease, cancellationToken);
+                    await FilterTransactionsByType(botClient, callbackQuery, TransactionType.Decrease,
+                        cancellationToken);
                     break;
 
                 case "back_to_menu":
@@ -192,7 +207,8 @@ public class TelegramBotService(
         }
     }
 
-    private async Task AddTransaction(ITelegramBotClient botClient, CallbackQuery callbackQuery, CancellationToken cancellationToken)
+    private async Task AddTransaction(ITelegramBotClient botClient, CallbackQuery callbackQuery,
+        CancellationToken cancellationToken)
     {
         var transactionTypeKeyboard = new InlineKeyboardMarkup(
             new[]
@@ -214,13 +230,16 @@ public class TelegramBotService(
         }
     }
 
-    private async Task HandleTransactionType(ITelegramBotClient botClient, long chatId, string transactionType, int messageId, CancellationToken cancellationToken)
+    private async Task HandleTransactionType(ITelegramBotClient botClient, long chatId, string transactionType,
+        int messageId, CancellationToken cancellationToken)
     {
         if (stateService.GetState(chatId) == "awaiting_transaction_type")
         {
-            stateService.SetState(chatId, transactionType);
+            stateService.SetState(chatId, "awaiting_price");
+            stateService.SetTempData(chatId, "transaction_type", transactionType);
+
             await botClient.EditMessageTextAsync(chatId, messageId,
-                "لطفاً مبلغ و توضیح تراکنش را وارد کنید.\n\n📌 مثال: 70000 - حقوق ماهانه",
+                "💰 لطفاً مبلغ تراکنش را وارد کنید (فقط عدد):",
                 cancellationToken: cancellationToken);
         }
         else
@@ -230,7 +249,8 @@ public class TelegramBotService(
         }
     }
 
-    private async Task FilterTransactionsByType(ITelegramBotClient botClient, CallbackQuery callbackQuery, TransactionType type, CancellationToken cancellationToken)
+    private async Task FilterTransactionsByType(ITelegramBotClient botClient, CallbackQuery callbackQuery,
+        TransactionType type, CancellationToken cancellationToken)
     {
         if (callbackQuery.Message != null)
         {
@@ -251,7 +271,8 @@ public class TelegramBotService(
                 {
                     var iranTimeString = GetIranTimeString(item.CreateDate);
                     string status = item.Status == TransactionStatus.Success ? "موفق" : "ناموفق";
-                    string transactionTypeString = item.TransactionType == TransactionType.Increase ? "واریز" : "برداشت";
+                    string transactionTypeString =
+                        item.TransactionType == TransactionType.Increase ? "واریز" : "برداشت";
 
                     message +=
                         $"📅 {iranTimeString.Split('\n')[0]}\n" +
@@ -268,7 +289,8 @@ public class TelegramBotService(
         }
     }
 
-    private async Task EditOrSendMenuAsync(ITelegramBotClient botClient, CallbackQuery callbackQuery, string messageText, CancellationToken cancellationToken)
+    private async Task EditOrSendMenuAsync(ITelegramBotClient botClient, CallbackQuery callbackQuery,
+        string messageText, CancellationToken cancellationToken)
     {
         var keyboard = new InlineKeyboardMarkup(new[]
         {
@@ -301,7 +323,8 @@ public class TelegramBotService(
         var iranTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Tehran");
         var iranDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, iranTimeZone);
         var pc = new PersianCalendar();
-        var date = $"{pc.GetYear(iranDateTime):0000}/{pc.GetMonth(iranDateTime):00}/{pc.GetDayOfMonth(iranDateTime):00}";
+        var date =
+            $"{pc.GetYear(iranDateTime):0000}/{pc.GetMonth(iranDateTime):00}/{pc.GetDayOfMonth(iranDateTime):00}";
         var time = $"{pc.GetHour(iranDateTime):00}:{pc.GetMinute(iranDateTime):00}";
         return $"📅 تاریخ: {date}\n⏰ ساعت: {time}";
     }

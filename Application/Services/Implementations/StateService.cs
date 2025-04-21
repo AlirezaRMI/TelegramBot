@@ -3,20 +3,38 @@ using Domain.IRipository;
 
 namespace Application.Services.Implementations;
 
-public class StateService(Dictionary<long,string> userstate): IStateService
+public class StateService : IStateService
 {
-    public void SetState(long chatId, string state)
-    {
-        userstate[chatId] = state;
-    }
+    private readonly Dictionary<long, string> _userStates = new();
+    private readonly Dictionary<long, Dictionary<string, object>> _tempData = new();
 
     public string? GetState(long chatId)
-    {
-      return userstate.TryGetValue(chatId, out var  state) ? state: null;
-    }
+        => _userStates.TryGetValue(chatId, out var state) ? state : null;
+
+    public void SetState(long chatId, string state)
+        => _userStates[chatId] = state;
 
     public void ClearState(long chatId)
+        => _userStates.Remove(chatId);
+
+    public void SetTempData<T>(long chatId, string key, T value)
     {
-        userstate.Remove(chatId);
+        if (!_tempData.ContainsKey(chatId))
+            _tempData[chatId] = new Dictionary<string, object>();
+
+        _tempData[chatId][key] = value!;
     }
+
+    public T GetTempData<T>(long chatId, string key)
+    {
+        if (_tempData.TryGetValue(chatId, out var data) && data.TryGetValue(key, out var value))
+        {
+            return (T)value!;
+        }
+
+        throw new KeyNotFoundException($"TempData with key '{key}' not found for chat {chatId}");
+    }
+
+    public void ClearTempData(long chatId)
+        => _tempData.Remove(chatId);
 }
