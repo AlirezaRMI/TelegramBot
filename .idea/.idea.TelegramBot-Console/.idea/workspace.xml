@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6ed1573-09b4-4819-8d92-f2fc2c2438f1" name="Changes" comment="complate">
+    <list default="true" id="b6ed1573-09b4-4819-8d92-f2fc2c2438f1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TelegramBot-Console/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TelegramBot-Console/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/bin/Debug/net9.0/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/bin/Debug/net9.0/Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/bin/Debug/net9.0/Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Application/bin/Debug/net9.0/Application.pdb" afterDir="false" />
@@ -25,8 +25,6 @@
       <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/ref/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/ref/Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/refint/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/refint/Application.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/AddTransaction.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Console/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/TelegramBotService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Console/TelegramBotService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Application.pdb" afterDir="false" />
@@ -42,7 +40,6 @@
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.sourcelink.json" afterDir="false" />
@@ -233,7 +230,9 @@
       <workItem from="1745132188534" duration="6480000" />
       <workItem from="1745139400457" duration="13368000" />
       <workItem from="1745154949789" duration="4801000" />
-      <workItem from="1745213512854" duration="12558000" />
+      <workItem from="1745213512854" duration="13843000" />
+      <workItem from="1745229747883" duration="878000" />
+      <workItem from="1745235678890" duration="2616000" />
     </task>
     <task id="LOCAL-00001" summary="Start telegrom-bot">
       <option name="closed" value="true" />
@@ -291,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745223510964</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="cheng-orginal-service">
+      <option name="closed" value="true" />
+      <created>1745228368425</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1745228368425</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,7 +325,8 @@
     <MESSAGE value="CreateDatabase" />
     <MESSAGE value="inital" />
     <MESSAGE value="complate" />
-    <option name="LAST_COMMIT_MESSAGE" value="complate" />
+    <MESSAGE value="cheng-orginal-service" />
+    <option name="LAST_COMMIT_MESSAGE" value="cheng-orginal-service" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
