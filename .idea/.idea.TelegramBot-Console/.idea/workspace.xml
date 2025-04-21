@@ -9,48 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6ed1573-09b4-4819-8d92-f2fc2c2438f1" name="Changes" comment="edite for new result from user">
+    <list default="true" id="b6ed1573-09b4-4819-8d92-f2fc2c2438f1" name="Changes" comment="end bot">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TelegramBot-Console/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TelegramBot-Console/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Services/Implementations/StateService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Implementations/StateService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/Services/Interfaces/IStateService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/Services/Interfaces/IStateService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/bin/Debug/net9.0/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/bin/Debug/net9.0/Application.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/bin/Debug/net9.0/Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Application/bin/Debug/net9.0/Application.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/Application.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/ref/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/ref/Application.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application/obj/Debug/net9.0/refint/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Application/obj/Debug/net9.0/refint/Application.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/TelegramBotService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Console/TelegramBotService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Application.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Application.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Console.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Console.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Console.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Console.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Console.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Console.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Ioc.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Ioc.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Ioc.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Console/bin/Debug/net9.0/Ioc.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/Console.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/apphost.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/ref/Console.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/ref/Console.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Console/obj/Debug/net9.0/refint/Console.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Console/obj/Debug/net9.0/refint/Console.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/bin/Debug/net9.0/Application.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/bin/Debug/net9.0/Application.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/bin/Debug/net9.0/Application.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/bin/Debug/net9.0/Application.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/bin/Debug/net9.0/Ioc.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/bin/Debug/net9.0/Ioc.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/bin/Debug/net9.0/Ioc.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/bin/Debug/net9.0/Ioc.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.AssemblyInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/Ioc.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/ref/Ioc.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/ref/Ioc.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/refint/Ioc.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Ioc/obj/Debug/net9.0/refint/Ioc.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +74,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/50ff98b86c8be4d332adea546769f805c78601d1ea7b8554578ec6d3d3f977/ITelegramBotClient.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5280f44993dc1d4d899063c281259ce7244f52e7081626ed7b3d66596b78a17/Update.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5530cc554df39585cf465b62c40ee25d2a68d6e3ebc5432eb73c2d436078/TelegramBotClient.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5825ddbfbc6566b81426d38b55ef6a58999b2ad14fe8461cac4ee0da714b/InlineKeyboardButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d185fd94cd63879b4afd76ec7eedad82e37cf1221a71d7ee5a1b0f7f8fa57b/TelegramBotClientExtensions.Polling.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Console/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -200,7 +173,7 @@
       <workItem from="1745154949789" duration="4801000" />
       <workItem from="1745213512854" duration="13843000" />
       <workItem from="1745229747883" duration="878000" />
-      <workItem from="1745235678890" duration="6413000" />
+      <workItem from="1745235678890" duration="9209000" />
     </task>
     <task id="LOCAL-00001" summary="Start telegrom-bot">
       <option name="closed" value="true" />
@@ -274,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745238373547</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="end bot">
+      <option name="closed" value="true" />
+      <created>1745242239586</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1745242239586</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,7 +284,8 @@
     <MESSAGE value="complate" />
     <MESSAGE value="cheng-orginal-service" />
     <MESSAGE value="edite for new result from user" />
-    <option name="LAST_COMMIT_MESSAGE" value="edite for new result from user" />
+    <MESSAGE value="end bot" />
+    <option name="LAST_COMMIT_MESSAGE" value="end bot" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
