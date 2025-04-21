@@ -54,6 +54,10 @@
             "Microsoft.Extensions.Hosting.Abstractions": {
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "Telegram.Bot": {
+              "target": "Package",
+              "version": "[19.0.0, )"
             }
           },
           "imports": [
@@ -147,7 +151,7 @@
             },
             "Telegram.Bot": {
               "target": "Package",
-              "version": "[22.5.0, )"
+              "version": "[19.0.0, )"
             }
           },
           "imports": [

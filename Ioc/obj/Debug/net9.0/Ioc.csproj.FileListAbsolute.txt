@@ -13,10 +13,10 @@ C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.Gener
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.AssemblyInfoInputs.cache
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.AssemblyInfo.cs
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.csproj.CoreCompileInputs.cache
+C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.sourcelink.json
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.csproj.Up2Date
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.dll
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\refint\Ioc.dll
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.pdb
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.genruntimeconfig.cache
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\ref\Ioc.dll
-C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Ioc\obj\Debug\net9.0\Ioc.sourcelink.json

@@ -13,20 +13,22 @@ public class UserTransaction : BaseEntity
 
     public TransactionStatus Status { get; set; }
 
-    [Required(ErrorMessage = "مبلغ تراکنش نمیتواند خالی باشد")]
+    public TransactionType TransactionType { get; set; }
     public long Price { get; set; }
 
     public bool IsConfirmed { get; set; }
-    public new DateOnly CreateDate { get; set; }
-    public TimeOnly CreatTime { get; set; }
+    
+    public new DateTime CreateDate { get; set; }
+    public long ChatId { get; set; }
+
+
+    public UserTransaction()
+    {
+    }
 
     #region Relation
 
     [ForeignKey(nameof(UserId))] public string? UserId { get; set; }
     public User? User { get; set; }
-
-    [EnumDataType(typeof(TransactionType), ErrorMessage = "نوع تراکنش معتبر نیست")]
-    public TransactionType Type { get; set; }
-
     #endregion
 }

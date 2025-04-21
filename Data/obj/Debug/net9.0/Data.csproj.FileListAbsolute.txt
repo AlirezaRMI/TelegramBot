@@ -9,10 +9,10 @@ C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.Gen
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.AssemblyInfoInputs.cache
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.AssemblyInfo.cs
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.csproj.CoreCompileInputs.cache
+C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.sourcelink.json
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.csproj.Up2Date
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.dll
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\refint\Data.dll
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.pdb
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.genruntimeconfig.cache
 C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\ref\Data.dll
-C:\Users\WWITDs\RiderProjects\TelegramBot-Console\Data\obj\Debug\net9.0\Data.sourcelink.json
