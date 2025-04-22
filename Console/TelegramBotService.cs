@@ -148,7 +148,8 @@ public class TelegramBotService(
                         new[]
                         {
                             InlineKeyboardButton.WithCallbackData("📥 واریزها", "filter_increase"),
-                            InlineKeyboardButton.WithCallbackData("📤 برداشت‌ها", "filter_decrease"),
+                            InlineKeyboardButton.WithCallbackData("📤 برداشت‌ها", "filter_decrease"), 
+                            InlineKeyboardButton.WithCallbackData("حذف تراکنش", "delete_transaction")
                         },
                         new[] { InlineKeyboardButton.WithCallbackData("🔙 بازگشت به منو", "back_to_menu") },
                     });
@@ -419,5 +420,59 @@ public class TelegramBotService(
             await EditOrSendMenuAsync(botClient, callbackQuery, message, keyboard, cancellationToken);
         }
     }
+    private async Task HandleDeleteTransaction(ITelegramBotClient botClient, long chatId, CancellationToken cancellationToken)
+    {
+        var transactions = await transactionService.GetTransactionsAsync(chatId);
     
+        if (!transactions.Any())
+        {
+            await botClient.SendTextMessageAsync(chatId, "❌ هیچ تراکنشی برای حذف وجود ندارد.", cancellationToken: cancellationToken);
+            return;
+        }
+        var transactionButtons = transactions.Select(t =>
+            InlineKeyboardButton.WithCallbackData($"حذف تراکنش {t.Price:#,0} تومان", $"delete_{t.Id}")
+        ).ToArray();
+
+        var keyboard = new InlineKeyboardMarkup(transactionButtons);
+
+        await botClient.SendTextMessageAsync(chatId, "لطفاً تراکنشی که می‌خواهید حذف کنید انتخاب کنید:", replyMarkup: keyboard, cancellationToken: cancellationToken);
+    }
+    private async Task HandleCallbackQueryAsync(ITelegramBotClient botClient, CallbackQuery callbackQuery, CancellationToken cancellationToken)
+    {
+        if (callbackQuery.Message != null)
+        {
+            var chatId = callbackQuery.Message.Chat.Id;
+            var callbackData = callbackQuery.Data ?? string.Empty;
+
+            if (callbackData.StartsWith("delete_"))
+            {
+                var transactionId = callbackData.Substring(7); // Extract the transaction ID
+
+                if (string.IsNullOrEmpty(transactionId))
+                {
+                    await botClient.EditMessageTextAsync(chatId, callbackQuery.Message.MessageId, 
+                        "❌ ID تراکنش یافت نشد.", cancellationToken: cancellationToken);
+                    return;
+                }
+
+                var transaction = await transactionService.GetTransactionByIdAsync(transactionId);
+                if (transaction != null)
+                {
+                    await transactionService.DeleteTransactionAsync(transactionId);  // Delete the transaction
+                    await botClient.EditMessageTextAsync(chatId, callbackQuery.Message.MessageId, 
+                        $"✅ تراکنش {transaction.Price:#,0} تومان با موفقیت حذف شد.", cancellationToken: cancellationToken);
+                }
+                else
+                {
+                    await botClient.EditMessageTextAsync(chatId, callbackQuery.Message.MessageId, 
+                        "❌ تراکنش مورد نظر پیدا نشد.", cancellationToken: cancellationToken);
+                }
+            }
+        }
+
+        await botClient.AnswerCallbackQueryAsync(callbackQuery.Id, cancellationToken: cancellationToken);
+    }
+
+
+
 }

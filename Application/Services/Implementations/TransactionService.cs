@@ -34,4 +34,17 @@ public class TransactionService(
             .ThenByDescending(t => t.CreateDate.TimeOfDay)
             .ToListAsync();
     }
+    public async Task DeleteTransactionAsync(string transactionId)
+    {
+        var transaction = await transactionRepository.GetByIdAsync(transactionId);
+        if (transaction != null)
+        {
+            await transactionRepository.DeleteAsync(transaction);
+        }
+    }
+
+    public async Task<UserTransaction?> GetTransactionByIdAsync(string transactionId)
+    {
+        return await transactionRepository.GetByIdAsync(transactionId);
+    }
 }
