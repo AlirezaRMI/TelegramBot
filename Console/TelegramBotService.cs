@@ -18,6 +18,14 @@ public class TelegramBotService(
     ITransactionService transactionService)
     : BackgroundService
 {
+    private InlineKeyboardMarkup GetBackToMenuKeyboard()
+    {
+        return new InlineKeyboardMarkup(new[]
+        {
+            new[] { InlineKeyboardButton.WithCallbackData("🔙 بازگشت به منو", "back_to_menu") }
+        });
+    }
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         var receiverOptions = new ReceiverOptions
@@ -78,16 +86,14 @@ public class TelegramBotService(
                 await botClient.DeleteMessageAsync(chatId, messageId, cancellationToken);
 
                 var balance = await userService.GetUserBalanceAsync(chatId);
-                var keyboard = new InlineKeyboardMarkup(new[]
-                {
-                    new[] { InlineKeyboardButton.WithCallbackData("🔙 بازگشت به منو", "back_to_menu") }
-                });
+                var keyboard = GetBackToMenuKeyboard();
+
 
                 await botClient.SendTextMessageAsync(chatId,
                     $"\n✅ تراکنش با موفقیت ثبت شد!\n💰 موجودی شما: {balance:#,0} تومان",
                     replyMarkup: keyboard,
                     cancellationToken: cancellationToken);
-         
+
                 return;
             }
 
@@ -144,7 +150,7 @@ public class TelegramBotService(
                             InlineKeyboardButton.WithCallbackData("📥 واریزها", "filter_increase"),
                             InlineKeyboardButton.WithCallbackData("📤 برداشت‌ها", "filter_decrease"),
                         },
-                        new[] { InlineKeyboardButton.WithCallbackData("🔙 بازگشت به منو", "back_to_menu") }
+                        new[] { InlineKeyboardButton.WithCallbackData("🔙 بازگشت به منو", "back_to_menu") },
                     });
                     await botClient.EditMessageTextAsync(chatId, callbackQuery.Message.MessageId,
                         "🔍 لطفاً نوع تراکنش‌هایی که می‌خوای ببینی رو انتخاب کن:", replyMarkup: filterKeyboard,
@@ -154,11 +160,28 @@ public class TelegramBotService(
                 case "add_transactions":
                     await AddTransaction(botClient, callbackQuery, cancellationToken);
                     break;
+                case "view_total_increase":
+                    await ShowTotalIncrease(botClient, callbackQuery, cancellationToken);
+                    break;
+
+                case "view_total_decrease":
+                    await ShowTotalDecrease(botClient, callbackQuery, cancellationToken);
+                    break;
 
                 case "view_balance":
                     var balance = await userService.GetUserBalanceAsync(chatId);
                     var balanceMsg = $"💰 موجودی شما: {balance:#,0} تومان";
-                    await EditOrSendMenuAsync(botClient, callbackQuery, balanceMsg, cancellationToken);
+                    var balanceKeyboard = new InlineKeyboardMarkup(new[]
+                    {
+                        new[]
+                        {
+                            InlineKeyboardButton.WithCallbackData("💸 مجموع برداشت‌ها", "view_total_decrease"),
+                            InlineKeyboardButton.WithCallbackData("💵 مجموع واریزی‌ها", "view_total_increase")
+                        },
+
+                        new[] { InlineKeyboardButton.WithCallbackData("🔙 بازگشت به منو", "back_to_menu") },
+                    });
+                    await EditOrSendMenuAsync(botClient, callbackQuery, balanceMsg, balanceKeyboard, cancellationToken);
                     break;
 
                 case "Increase":
@@ -238,7 +261,7 @@ public class TelegramBotService(
         stateService.SetTempData(chatId, "price", price);
         stateService.SetState(chatId, "awaiting_description");
 
-      var descriptionPrompt =  await botClient.SendTextMessageAsync(chatId,
+        var descriptionPrompt = await botClient.SendTextMessageAsync(chatId,
             "📝 لطفاً توضیح تراکنش را وارد کنید.",
             cancellationToken: cancellationToken);
         stateService.SetTempData(chatId, "description_prompt_message_id", descriptionPrompt.MessageId);
@@ -254,7 +277,7 @@ public class TelegramBotService(
                 InlineKeyboardButton.WithCallbackData("➕ واریز", "Increase"),
                 InlineKeyboardButton.WithCallbackData("➖ برداشت", "Decrease"),
             },
-            new[] { InlineKeyboardButton.WithCallbackData("🔙 بازگشت به منو", "back_to_menu") }
+            new[] { InlineKeyboardButton.WithCallbackData("🔙 بازگشت به منو", "back_to_menu") },
         });
 
         if (callbackQuery.Message != null)
@@ -270,6 +293,7 @@ public class TelegramBotService(
     private async Task FilterTransactionsByType(ITelegramBotClient botClient, CallbackQuery callbackQuery,
         TransactionType type, CancellationToken cancellationToken)
     {
+        var keyboard = GetBackToMenuKeyboard();
 
         if (callbackQuery.Message != null)
         {
@@ -294,36 +318,35 @@ public class TelegramBotService(
                           $"وضعیت: {status}\n🟰🟰🟰🟰🟰";
                   }));
 
-            await EditOrSendMenuAsync(botClient, callbackQuery, message, cancellationToken);
+            await EditOrSendMenuAsync(botClient, callbackQuery, message, keyboard, cancellationToken);
         }
     }
 
     private async Task EditOrSendMenuAsync(ITelegramBotClient botClient, CallbackQuery callbackQuery,
-        string messageText, CancellationToken cancellationToken)
+        string messageText, InlineKeyboardMarkup keyboard, CancellationToken cancellationToken)
     {
-        var keyboard = new InlineKeyboardMarkup(new[]
-        {
-            new[] { InlineKeyboardButton.WithCallbackData("🔙 بازگشت به منو", "back_to_menu") }
-        });
-
         try
         {
             if (callbackQuery.Message != null)
+            {
                 await botClient.EditMessageTextAsync(
                     chatId: callbackQuery.Message.Chat.Id,
                     messageId: callbackQuery.Message.MessageId,
                     text: messageText,
                     replyMarkup: keyboard,
                     cancellationToken: cancellationToken);
+            }
         }
         catch
         {
             if (callbackQuery.Message != null)
+            {
                 await botClient.SendTextMessageAsync(
                     chatId: callbackQuery.Message.Chat.Id,
                     text: messageText,
                     replyMarkup: keyboard,
                     cancellationToken: cancellationToken);
+            }
         }
     }
 
@@ -353,4 +376,48 @@ public class TelegramBotService(
     {
         return Task.CompletedTask;
     }
+
+    private async Task ShowTotalIncrease(ITelegramBotClient botClient, CallbackQuery callbackQuery,
+        CancellationToken cancellationToken)
+    {
+        if (callbackQuery.Message != null)
+        {
+            var chatId = callbackQuery.Message.Chat.Id;
+            var transactions = await transactionService.GetTransactionsAsync(chatId);
+            var totalIncrease = transactions
+                .Where(t => t.TransactionType == TransactionType.Increase)
+                .Sum(t => t.Price);
+
+            var message = totalIncrease > 0
+                ? $"💵 مجموع واریزی‌ها: {totalIncrease:#,0} تومان"
+                : "❌ هیچ واریزی‌ای پیدا نشد.";
+
+            var keyboard = GetBackToMenuKeyboard();
+
+            await EditOrSendMenuAsync(botClient, callbackQuery, message, keyboard, cancellationToken);
+        }
+    }
+
+
+    private async Task ShowTotalDecrease(ITelegramBotClient botClient, CallbackQuery callbackQuery,
+        CancellationToken cancellationToken)
+    {
+        if (callbackQuery.Message != null)
+        {
+            var chatId = callbackQuery.Message.Chat.Id;
+            var transactions = await transactionService.GetTransactionsAsync(chatId);
+            var totalDecrease = transactions
+                .Where(t => t.TransactionType == TransactionType.Decrease)
+                .Sum(t => t.Price);
+
+            var message = totalDecrease > 0
+                ? $"💸 مجموع برداشت‌ها: {totalDecrease:#,0} تومان"
+                : "❌ هیچ برداشتی‌ای پیدا نشد.";
+
+            var keyboard = GetBackToMenuKeyboard();
+
+            await EditOrSendMenuAsync(botClient, callbackQuery, message, keyboard, cancellationToken);
+        }
+    }
+    
 }

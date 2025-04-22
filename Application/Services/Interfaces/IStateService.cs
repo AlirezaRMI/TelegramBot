@@ -7,7 +7,7 @@ public interface IStateService
     void ClearState(long chatId);
     
     void SetTempData<T>(long chatId, string key, T value);
-    T GetTempData<T>(long chatId, string key);
+    T GetTempData<T>(long chatId, string key, T defaultValue = default);
     void ClearTempData(long chatId);
     
 }

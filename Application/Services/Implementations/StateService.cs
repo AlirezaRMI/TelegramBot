@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using Application.Services.Interfaces;
 using Domain.IRipository;
 
@@ -5,8 +6,8 @@ namespace Application.Services.Implementations;
 
 public class StateService : IStateService
 {
-    private readonly Dictionary<long, string> _userStates = new();
-    private readonly Dictionary<long, Dictionary<string, object>> _tempData = new();
+    private readonly ConcurrentDictionary<long, string> _userStates = new();
+    private readonly ConcurrentDictionary<long, Dictionary<string, object>> _tempData = new();
 
     public string? GetState(long chatId)
         => _userStates.TryGetValue(chatId, out var state) ? state : null;
@@ -15,26 +16,29 @@ public class StateService : IStateService
         => _userStates[chatId] = state;
 
     public void ClearState(long chatId)
-        => _userStates.Remove(chatId);
+        => _userStates.TryRemove(chatId, out _);
 
     public void SetTempData<T>(long chatId, string key, T value)
     {
-        if (!_tempData.ContainsKey(chatId))
-            _tempData[chatId] = new Dictionary<string, object>();
+        if (value == null)
+            throw new ArgumentNullException(nameof(value), "Value cannot be null");
 
-        _tempData[chatId][key] = value!;
+        _tempData.AddOrUpdate(chatId, new Dictionary<string, object> { { key, value } }, (k, existingData) =>
+        {
+            existingData[key] = value;
+            return existingData;
+        });
     }
 
-    public T GetTempData<T>(long chatId, string key)
+    public T GetTempData<T>(long chatId, string key, T defaultValue = default)
     {
         if (_tempData.TryGetValue(chatId, out var data) && data.TryGetValue(key, out var value))
         {
             return (T)value!;
         }
-
-        throw new KeyNotFoundException($"TempData with key '{key}' not found for chat {chatId}");
+        return defaultValue;
     }
 
     public void ClearTempData(long chatId)
-        => _tempData.Remove(chatId);
+        => _tempData.TryRemove(chatId, out _);
 }
