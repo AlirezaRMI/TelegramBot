@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<ITelegramBotClient>(provider =>
-    new TelegramBotClient("7659473718:AAG4FBXc6ks1bu4qR4DYo2vCTw_YWfjhsi0"));
+    new TelegramBotClient("7659473718:AAFf5LmCaGUj0vFxdz7hshq0P5Hucq81Y8Q"));
 
 #region sql config
 
